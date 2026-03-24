@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container carousel-container my-5">
+
+  <div id="carouselSplit"
+       class="carousel slide"
+       data-bs-ride="carousel"
+       data-bs-interval="3000">
+
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselSplit" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#carouselSplit" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#carouselSplit" data-bs-slide-to="2"></button>
+    </div>
+
+    <div class="carousel-inner">
+
+      <!-- SLIDE 1 -->
+      <div class="carousel-item active">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="p-4">
+              <h2>Alimento Premium 🐶</h2>
+              <p>Nutrición completa para una vida saludable.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <img src="{% static 'img/banner1.png' %}"
+                 class="d-block w-100 rounded"
+                 alt="Alimentos">
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="p-4">
+              <h2>Juguetes Divertidos </h2>
+              <p>Entretenimiento asegurado para tu mascota.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <img src="{% static 'img/banner2.png' %}"
+                 class="d-block w-100 rounded"
+                 alt="Juguetes">
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="p-4">
+              <h2>Accesorios 🐾</h2>
+              <p>Estilo y comodidad para tu mascota.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <img src="{% static 'img/banner3.png' %}"
+                 class="d-block w-100 rounded"
+                 alt="Accesorios">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselSplit"
+            data-bs-slide="prev">
+      
+    </button>
+
+    <button class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselSplit"
+            data-bs-slide="next">
+      
+    </button>
+
+  </div>
+</div>
+<div class="seccion2"
+<div class="container my-5">
+    <div class="row align-items-center justify-content-center">
+        
+        <div class="col-lg-4 col-md-5 text-center mb-4 mb-lg-0">
+            <div class="image-circle-wrapper">
+                <img src="{% static 'img/store.png' %}" alt="Nuestro Menú" class="banner-img-circle">
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="category-side-container ps-lg-4">
+                <h2 class="mb-4 text-center text-lg-start">Nuestros Productos</h2>
+                
+                <div class="category-filters d-flex flex-column gap-2">
+                    
+                    <a href="{% url 'tienda' %}"
+                       class="btn btn-category w-100 {% if not categoria_actual %}active{% endif %}">
+                       Todas
+                    </a>
+
+                    {% for categoria in categorias %}
+                      <a href="{% url 'productos_categoria' categoria.slug %}"
+                         class="btn btn-category w-100 {% if categoria_actual and categoria_actual.slug == categoria.slug %}active{% endif %}">
+                         {{ categoria.nombre }}
+                      </a>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="container my-5">
+    <div class="row g-3 justify-content-center">
+        {% for producto in productos %}
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card h-100">
+                    <img src="{{ producto.picture.url }}"
+                         class="card-img-top"
+                         alt="{{ producto.name }}">
+
+                    <div class="card-body text-center d-flex flex-column">
+                        <h5 class="card-title">{{ producto.name }}</h5>
+
+                        <p class="card-text small text-muted">
+                            {{ producto.description|truncatechars:50 }}
+                        </p>
+
+                        <div class="mt-auto">
+                            <p class="fw-bold mb-1">
+                                ${{ producto.price }}
+                            </p>
+                            <p class="text-muted small mb-0">
+                                Stock: {{ producto.stock }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12 text-center">
+                <p class="lead">No hay productos disponibles en esta categoría.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<section class="reviews-section pt-5 pb-0 mb-0">
+  <div class="container text-center">
+
+    <h2 class="mb-5 customtitle">
+       Opiniones de nuestros clientes ★
+    </h2>
+
+    <div class="row justify-content-center g-4">
+
+      <div class="col-md-4">
+        <div class="review-card p-4 shadow-sm rounded border">
+          <img src="{% static 'img/review1.jpeg' %}"
+               class="review-img mb-3"
+               style="width:80px;height:80px;border-radius:50%;object-fit:cover;"
+               alt="Cliente">
+          <div class="rating mb-2 text-warning fs-5">★★★★★</div>
+          <p class="review-text">
+            "Mi perrito está súper feliz con su juguete..."
+          </p>
+          <h6 class="mt-3"> -Claudio V.</h6>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="review-card p-4 shadow-sm rounded border">
+          <img src="{% static 'img/review2.png' %}"
+               class="review-img mb-3"
+               style="width:80px;height:80px;border-radius:50%;object-fit:cover;"
+               alt="Cliente">
+          <div class="rating mb-2 text-warning fs-5">★★★★☆</div>
+          <p class="review-text">
+            "Juguete funciona bien..."
+          </p>
+          <h6 class="mt-3"> -Vimtko.</h6>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="review-card p-4 shadow-sm rounded border">
+          <img src="{% static 'img/review3.jpeg' %}"
+               class="review-img mb-3"
+               style="width:80px;height:80px;border-radius:50%;object-fit:cover;"
+               alt="Cliente">
+          <div class="rating mb-2 text-warning fs-5">★★★★★</div>
+          <p class="review-text">
+            "El pepe ama su nuevo hueso chillón..."
+          </p>
+          <h6 class="mt-3"> -Pepe el perro.</h6>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
