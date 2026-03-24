@@ -44,28 +44,8 @@ Incluye sistema de categorías, catálogo dinámico y estilos personalizados con
 
 ---
 
-## III. Estructura del proyecto
 
-```bash
-dogstore/
-│
-├── tienda/
-│   ├── models.py
-│   ├── views.py
-│   ├── urls.py
-│   ├── static/
-│   │   ├── css/
-│   │   ├── img/
-│   │   └── node_modules/
-│   └── templates/
-│
-├── manage.py
-└── README.md
-```
-
----
-
-## IV. Instalación y configuración
+## III. Instalación y configuración
 
 ### a. Clonar el repositorio
 
@@ -105,7 +85,7 @@ python manage.py runserver
 
 ---
 
-## V. Funcionalidades destacadas
+## IV. Funcionalidades destacadas
 
 * Carrusel dinámico con promociones
 * Botones personalizados con SCSS
